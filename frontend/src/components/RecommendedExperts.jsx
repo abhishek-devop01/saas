@@ -13,7 +13,6 @@ function RecommendedExperts({ projectId }) {
                 console.error(err);
             }
         };
-
         fetchExperts();
     }, [projectId]);
 
@@ -22,7 +21,7 @@ function RecommendedExperts({ projectId }) {
         if (!date) return;
 
         try {
-            const res = await API.post('/sessions/book', { projectId, expertId, date });
+            await API.post('/sessions/book', { projectId, expertId, date });
             alert('Session booked successfully!');
         } catch (err) {
             console.error(err);
@@ -32,17 +31,14 @@ function RecommendedExperts({ projectId }) {
 
     return (
         <div>
-            <h3>Recommended Experts</h3>
+            <h3 className="text-xl font-bold mb-2">Recommended Experts</h3>
             <ul>
                 {experts.map(expert => (
-                    <li key={expert._id} className="mb-2 border p-2 rounded">
-                        <strong>{expert.name}</strong> - Skills: {expert.skills.join(', ')}
-                        <button
-                            onClick={() => bookSession(expert._id)}
-                            className="ml-4 bg-green-500 text-white px-2 py-1 rounded"
-                        >
-                            Book Session
-                        </button>
+                    <li key={expert._id} className="mb-2 border p-2 rounded flex justify-between items-center">
+                        <div>
+                            <strong>{expert.name}</strong> - Skills: {expert.skills.join(', ')}
+                        </div>
+                        <button onClick={() => bookSession(expert._id)} className="bg-green-500 text-white px-2 py-1 rounded">Book Session</button>
                     </li>
                 ))}
             </ul>

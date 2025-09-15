@@ -1,9 +1,9 @@
-const User = require('../models/User');
-const bcrypt = require('bcryptjs');
-const generateToken = require('../utils/generateToken');
+import User from '../models/User.js';
+import bcrypt from 'bcryptjs';
+import generateToken from '../utils/generateToken.js';
 
 // Register User
-exports.registerUser = async (req, res) => {
+export const registerUser = async (req, res) => {
     const { name, email, password, role } = req.body;
 
     const existingUser = await User.findOne({ email });
@@ -30,22 +30,29 @@ exports.registerUser = async (req, res) => {
 };
 
 // Login User
-exports.loginUser = async (req, res) => {
-    const { email, password } = req.body;
+export const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: 'Invalid credentials' });
+        const user = await User.findOne({ email });
+        if (!user) return res.status(400).json({ message: 'Invalid credentials' });
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
-    const token = generateToken(user._id);
+        const token = generateToken(user._id);
 
-    res.status(200).json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        token
-    });
+        res.status(200).json({
+            token,
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    }
 };

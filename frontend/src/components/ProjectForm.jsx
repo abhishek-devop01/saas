@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import API from '../api/api';
 
-function ProjectForm() {
+function ProjectForm({ onCreated }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [skills, setSkills] = useState('');
@@ -18,7 +18,7 @@ function ProjectForm() {
             setTitle('');
             setDescription('');
             setSkills('');
-            if(onCreated) onCreated(res.data.project._id);
+            if (onCreated) onCreated(res.data.project._id);
         } catch (err) {
             console.error(err);
             alert('Error creating project');
@@ -26,7 +26,7 @@ function ProjectForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="p-4 border rounded shadow">
+        <form onSubmit={handleSubmit} className="p-4 border rounded shadow mb-4">
             <input value={title} onChange={e => setTitle(e.target.value)} placeholder="Project Title" className="w-full p-2 border mb-2"/>
             <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Project Description" className="w-full p-2 border mb-2"/>
             <input value={skills} onChange={e => setSkills(e.target.value)} placeholder="Skills (comma separated)" className="w-full p-2 border mb-2"/>

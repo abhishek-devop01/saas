@@ -1,12 +1,19 @@
-import ExpertDashboard from './components/ExpertDashboard';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
 
 function App() {
-    const expertId = "64fa1234abc567890def3456"; // Replace with logged-in expert ID
-
     return (
-        <div className="App">
-            <ExpertDashboard expertId={expertId} />
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+        </Router>
     );
 }
 
