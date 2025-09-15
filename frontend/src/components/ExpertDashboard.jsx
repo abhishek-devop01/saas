@@ -1,27 +1,44 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
+import API from '../api/api';
 
-const socket = io('http://localhost:5000'); // Backend URL
+const socket = io('http://localhost:5000');
 
 function ExpertDashboard({ expertId }) {
+    const [sessions, setSessions] = useState([]);
+
     useEffect(() => {
-        // Expert joins their room
         socket.emit('joinExpertRoom', expertId);
 
-        // Listen for new session requests
         socket.on('newSessionRequest', (data) => {
             alert(`New session request for project ${data.projectId}`);
+            fetchSessions();
         });
+
+        fetchSessions();
 
         return () => {
             socket.off('newSessionRequest');
         };
     }, [expertId]);
 
+    const fetchSessions = async () => {
+        try {
+            const res = await API.get('/sessions/my'); // Backend API to fetch expert's sessions
+            setSessions(res.data.sessions);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     return (
         <div>
-            <h1>Welcome Expert</h1>
-            {/* You can also display list of session requests here */}
+            <h2>My Sessions</h2>
+            <ul>
+                {sessions.map(s => (
+                    <li key={s._id}>{s.project.title} - {s.status}</li>
+                ))}
+            </ul>
         </div>
     );
 }
