@@ -1,0 +1,68 @@
+
+
+# 🌐 Reverse Internship Platform
+
+> A MERN + OpenAI powered platform where **startups and institutions can “intern” under retired professionals** to gain wisdom, mentorship, and consulting. Instead of letting decades of experience go untapped, this platform creates a bridge between **experience-rich retirees** and **innovation-driven organizations**.
+
+---
+
+## 📌 Problem
+
+Retired professionals have vast knowledge and expertise, but after leaving the workforce, there are very few structured channels for them to contribute. Their skills often go underutilized, while startups and young institutions struggle with lack of affordable mentorship and guidance.
+
+---
+
+## 💡 Idea
+
+This project flips the traditional internship model:
+
+* **Startups/Institutions “intern” under retired experts**.
+* Retired professionals provide **mentorship, strategy, and part-time consulting**.
+* AI assists in **matching, summarization, and engagement**.
+
+---
+
+## 🚀 Features (Phase 1 – MVP)
+
+✅ Dual login (Retired Professional / Startup/Institution)
+✅ Profile creation (with AI-generated bios)
+✅ Project posting & discovery
+✅ Basic chat/messaging system
+✅ AI assistant for onboarding & FAQs
+✅ Deployed with **MERN stack + OpenAI API**
+
+---
+
+## 🛠️ Tech Stack
+
+* **Frontend:** React, TailwindCSS, Axios, React Router
+* **Backend:** Node.js, Express.js
+* **Database:** MongoDB (Atlas)
+* **Authentication:** JWT, bcrypt
+* **AI Integration:** OpenAI API (Chat & Summarization)
+* **Deployment:** Vercel (Frontend), Render/Heroku (Backend)
+
+
+## 🎯 Roadmap
+
+* **Phase 1 (MVP):** Authentication, profiles, projects, chat, AI FAQ
+* **Phase 2:** AI matching, session booking, knowledge hub
+* **Phase 3:** In-app video calls, mobile app, multi-language support
+* **Phase 4:** Global scaling, partnerships, monetization
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to fork, submit issues, and open PRs.
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+✨ **Reverse Internship Platform** → Because wisdom should never retire.
+
