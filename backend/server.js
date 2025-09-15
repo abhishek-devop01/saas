@@ -6,6 +6,10 @@ const http = require('http');
 const { Server } = require('socket.io');
 const authRoutes = require('./routes/authRoutes');
 const projectRoutes = require('./routes/projectRoutes');
+const recommendationRoutes = require('./routes/recommendationRoutes');
+const sessionRoutes = require('./routes/sessionRoutes');
+const { socketHandler } = require('./sockets/socketHandler');
+
 
 const app = express();
 const server = http.createServer(app);
@@ -17,6 +21,11 @@ app.use(cors());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
+app.use('/api/recommendations', recommendationRoutes);
+app.use('/api/sessions', sessionRoutes);
+
+
+socketHandler(io);
 
 
 // Simple Test Route
